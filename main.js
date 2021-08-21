@@ -21,11 +21,8 @@ var udarec;
 var expl;
 var p1t;
 var p2t;
-//var spacebar;
 class Scene1 extends Phaser.Scene {
     constructor () {
-        // Pripravimo zacetno stanje scene
-        //console.log("IgraScene constructor");
         super();
         this.state = {
             
@@ -34,8 +31,6 @@ class Scene1 extends Phaser.Scene {
 
     
     preload () {
-        // Tukaj vnaprej nalozimo slike, animacije in zvoke.
-        //console.log("IgraScene preload");
         this.load.image('player1', './images/player1.png');
         this.load.image('player1_m', './images/player1_m.png');
         this.load.image('player2', './images/player2.png');
@@ -62,20 +57,14 @@ class Scene1 extends Phaser.Scene {
     }
 
     create () {
-        // Tukaj ustvarimo elemente igre in jih postavimo v sceno.
-        //console.log("IgraScene create");
         this.add.image(900, 400, 'background')
         cursors = this.input.keyboard.createCursorKeys();
-        //spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-        //background_platforma = this.physics.add.staticSprite(900, 720, 'background_platforma')
         player1 = this.physics.add.image(450, 560, 'player1')
-        //player1_m = this.physics.add.image('player1_m');
         player2 = this.physics.add.image(1350, 560, 'player2');
-        //player2_m = this.physics.add.image('player2_m');
         player1.setCollideWorldBounds(true);
         player2.setCollideWorldBounds(true);
         p1_healt = this.add.image(100, 100, '100healt');
@@ -99,8 +88,6 @@ class Scene1 extends Phaser.Scene {
         window.scene = this;
         window.player1 = player1;
         window.player2 = player2;
-        //this.physics.add.overlap(player2, sword, () => this.overlap_f(false));
-        //this.physics.add.overlap(player2, sword_m, () => this.overlap_f(true));
         this.physics.add.overlap(player2, sword, this.mec);
         this.physics.add.overlap(player2, sword_m, this.mec_m);
         
@@ -110,8 +97,6 @@ class Scene1 extends Phaser.Scene {
     
 
     update() {
-        // Tukaj dodamo logiko, ki spreminjanja sceno.
-        // Pomembno: Ta funkcija update() se poklice mnogokrat na sekundo.
         
         sword.x = (player1.x + 115);
         sword.y = (player1.y + 26);
@@ -180,7 +165,6 @@ class Scene1 extends Phaser.Scene {
             }
             
         } else {
-            //console.log(cursors.down.isDown)
             if(cursors.left.isDown){
                 player2.setVelocityX(-100)
                 player2.setTexture("player2")
@@ -197,15 +181,6 @@ class Scene1 extends Phaser.Scene {
             }
 
         }
-
-        /*
-        if(cursors.down.isDown && explosion_t == 0){
-            explosion = this.physics.add.image(player2.y + 10, player2.x - 300, 'explosion');
-            explosion.setCollideWorldBounds(true);
-            explosion.setScale(1.5);
-            explosion_t = 1;
-        }
-        */
         if(!cursors.down.isDown && !cursors.left.isDown && !cursors.right.isDown){
             player2.setTexture("player2")
         }
@@ -215,8 +190,6 @@ class Scene1 extends Phaser.Scene {
         if(!cursors.left.isDown && !cursors.right.isDown || cursors.left.isDown == true && cursors.right.isDown == true){
             player2.setVelocityX(0)
         }
-
-        //console.log(player2.body.x)
         if(explosion_t > 0){
             if (explosion_t == 1) expl.play();
             explosion_t += 1;
@@ -254,9 +227,6 @@ class Scene1 extends Phaser.Scene {
             this.registry.destroy(); 
             this.events.off();
             this.scene.restart();
-            /*setTimeout(function() {
-                
-            }, 1000);*/
             p1_life = 10
             p2_life = 10
         }
@@ -281,9 +251,6 @@ class Scene1 extends Phaser.Scene {
             this.registry.destroy(); 
             this.events.off();
             this.scene.restart();
-            /*setTimeout(function() {
-                
-            }, 1000);*/
             p2_life = 10
             p1_life = 10
         }
@@ -292,19 +259,15 @@ class Scene1 extends Phaser.Scene {
 
     overlap_f(){
         if (!explosion.didhit) {
-            //console.log("overlap")
             explosion.didhit = 1;
             p1_life -= 1
-            //console.log(p1_life)
         }
     }
     mec(){
         if(keyS.isDown && !keyA.isDown){
                 if(!sword_t){
                     sword_t = 1;
-                    //console.log("hit");
                     p2_life -= 1
-                    //console.log(p2_life)
                     return;
                 }
             
@@ -314,9 +277,7 @@ class Scene1 extends Phaser.Scene {
         if(keyS.isDown && keyA.isDown){
             if(!sword_t){
                 sword_t = 1;
-                //console.log("hit");
                 p2_life -= 1
-                //console.log(p2_life)
                 return;
             }
         
@@ -325,7 +286,6 @@ class Scene1 extends Phaser.Scene {
     
 }
 
-// Phaser nastavitve in zagon igre.
 const config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
@@ -335,7 +295,6 @@ const config = {
         default: 'arcade',
         arcade: {
             gravity: { x: 0, y: 200 },
-            // Tu odkomentiraj debug: true za izrisovanje informacij o fiziki
             //debug: true
         }
     },    
