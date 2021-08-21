@@ -5,7 +5,7 @@ I / ([@Mato2007](https://github.com/Mato2007)) wrote the code and Dorian took ca
 
 ## Getting Started
 
-If you want to get this game running on you computer follow next steps!
+If you want to get this game up and running on you computer follow next steps!
 
 ### -Requirements
 
@@ -13,7 +13,7 @@ Required tools:
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Live Server Extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
 
-### -How to run it
+### -How To Get It Up And Running
 1. Download SwordVsMagic from github(https://github.com/Mato2007/SwordVsMagic)
 2. Extract **SwordVsMagic-main** from the .zip file
 3. Open **SwordVsMagic-main** folder in Visual Studio Code
