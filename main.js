@@ -83,8 +83,8 @@ class Scene1 extends Phaser.Scene {
         sword_m .body.setAllowGravity(false);
         sword_m.setScale(0.62);
         sword_m.visible = false;
-        var music = this.sound.add('muzika', {volume: 0.5});
-        music.play();
+        //var music = this.sound.add('muzika', {volume: 0.5});
+        //music.play();
         this.physics.world.bounds.height -= 150;
         udarec = this.sound.add('hit');
         expl = this.sound.add('expl');
