@@ -21,6 +21,12 @@ var udarec;
 var expl;
 var p1t;
 var p2t;
+var C; 
+var controls; 
+var c_counter = 0; 
+var controls_h; 
+var p1_controls;    
+var p2_controls;    
 class Scene1 extends Phaser.Scene {
     constructor () {
         super();
@@ -90,6 +96,13 @@ class Scene1 extends Phaser.Scene {
         window.player2 = player2;
         this.physics.add.overlap(player2, sword, this.mec);
         this.physics.add.overlap(player2, sword_m, this.mec_m);
+        C = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C); 
+        controls = this.add.text(737.5, 10, "Press C to show contorls", {fontSize: '32px', fill: '#000000', fontWeight: 'bold', fontFamily: 'fantasy'}); 
+        controls_h = this.add.text(737.5, 10, "Press C to hide contorls", {fontSize: '32px', fill: '#000000', fontWeight: 'bold', fontFamily: 'fantasy'}); 
+        p1_controls = this.add.text(10, 400, "Player 1:\nW = jump\nA = left\nD = right\nS = attack", {fontSize: '32px', fill: '#000000', fontWeight: 'bold', fontFamily: 'fantasy'}); 
+        p1_controls.alpha = 0.5; 
+        p2_controls = this.add.text(1520, 400, "Player 2:\narrow UP = jump\narrow LEFT = left\narrow RIGHT = right\narrow DOWN = attack", {fontSize: '32px', fill: '#000000', fontWeight: 'bold', fontFamily: 'fantasy'}); 
+        p2_controls.alpha = 0.5; 
         
 
     }
@@ -107,6 +120,21 @@ class Scene1 extends Phaser.Scene {
         p2t.x = (player2.x - 60);
         p2t.y = (player2.y - 170);
         
+        if (Phaser.Input.Keyboard.JustDown(C)){    
+            c_counter = c_counter + 1
+        }
+        if (c_counter % 2 != 0){   
+            controls.visible = false
+            controls_h.visible = true
+            p1_controls.visible = true
+            p2_controls.visible = true
+        }
+        if (c_counter % 2 == 0){     
+            controls.visible = true
+            controls_h.visible = false
+            p1_controls.visible = false
+            p2_controls.visible = false
+        }
 
         sword.visible = false;
         sword_m.visible = false;
